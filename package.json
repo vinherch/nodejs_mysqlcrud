@@ -1,0 +1,24 @@
+{
+  "name": "mysqlcrud",
+  "version": "1.0.0",
+  "description": "MYSQL Crud Example",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ./src/main.js",
+    "dev": "nodemon ./src/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^5.0.3",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-ejs-layouts": "^2.5.1",
+    "joi": "^17.6.0",
+    "morgan": "^1.10.0",
+    "mysql": "github:mysqljs/mysql",
+    "nodemon": "^2.0.19",
+    "path": "^0.12.7"
+  }
+}
