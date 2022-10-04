@@ -20,6 +20,10 @@ footer {
   width: 100%;
 }
 
+.user-create-form {
+  min-width: 70%;
+}
+
 .record {
   transition: all 5s ease;
 }
@@ -30,6 +34,63 @@ footer {
 
 .record-error {
   animation: error 2000ms ease-in-out alternate-reverse;
+}
+
+/* Create User */
+.profile-img-container {
+  min-height: 10rem;
+  min-width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-img-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 10rem;
+  border: 1px solid rgb(178, 178, 178);
+  border-radius: 100%;
+  box-shadow: 2px 2px 10px rgb(149, 149, 149);
+  position: relative;
+}
+
+.profile-img-container div::before {
+  content: "Click to add an image ...";
+  position: absolute;
+  left: 105%;
+  top: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  color: rgb(85, 85, 85);
+  width: 13rem;
+  height: 2.5rem;
+  border-radius: 3px;
+  box-shadow: 1px 1px 10px gray;
+  opacity: 0;
+  transition: all 350ms ease-in-out;
+}
+
+.profile-img-container div:hover::before {
+  opacity: 0.8;
+}
+
+.avatar {
+  color: rgb(123, 123, 123);
+  font-size: 5rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.btn-user-submit {
+  width: 100%;
+  max-width: 30rem;
 }
 
 /* animations */
