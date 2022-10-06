@@ -21,7 +21,9 @@ footer {
 }
 
 .user-create-form {
-  min-width: 70%;
+  width: 50%;
+  max-width: 30rem;
+  position: relative;
 }
 
 .record {
@@ -37,31 +39,21 @@ footer {
 }
 
 /* Create User */
-.profile-img-container {
+.user-img-container {
+  margin: 0 auto;
   min-height: 10rem;
   min-width: 10rem;
+  width: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.profile-img-container div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 10rem;
-  width: 10rem;
-  border: 1px solid rgb(178, 178, 178);
-  border-radius: 100%;
-  box-shadow: 2px 2px 10px rgb(149, 149, 149);
-  position: relative;
-}
-
-.profile-img-container div::before {
+.user-img-container::before {
   content: "Click to add an image ...";
   position: absolute;
-  left: 105%;
-  top: 15%;
+  left: 70%;
+  top: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,15 +65,41 @@ footer {
   box-shadow: 1px 1px 10px gray;
   opacity: 0;
   transition: all 350ms ease-in-out;
+  font-weight: lighter;
+  z-index: 2;
 }
 
-.profile-img-container div:hover::before {
-  opacity: 0.8;
+.user-img-container:hover::before {
+  opacity: 1;
+}
+
+.user-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+  width: 10rem;
+  border: 1px solid rgb(178, 178, 178);
+  border-radius: 100%;
+  box-shadow: 2px 2px 10px rgb(149, 149, 149);
+  overflow: hidden;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+}
+
+.user-img img {
+  width: 180px;
+  height: 180px;
+}
+
+.user-img-upload {
+  cursor: pointer;
 }
 
 .avatar {
   color: rgb(123, 123, 123);
-  font-size: 5rem;
+  font-size: 7rem;
 }
 
 input[type="file"] {

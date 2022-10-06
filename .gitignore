@@ -50,6 +50,9 @@ typings/
 # Optional npm cache directory
 .npm
 
+# Temp image cache
+tmp_uploads/
+
 # Optional eslint cache
 .eslintcache
 
@@ -102,3 +105,4 @@ dist
 
 # TernJS port file
 .tern-port
+

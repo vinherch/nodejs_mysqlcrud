@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const multer = require("multer")({ dest: "tmp_uploads/" });
 
 const userDAO = require("../dao/userDAO");
 const { validateNewUser } = require("../validation/validation");
@@ -40,9 +41,8 @@ router.get("/create/", async (req, res) => {
 //POST
 //*******TODO -> Form contains data after invalid submit/validation*****************
 //Create new user
-router.post("/create", async (req, res) => {
+router.post("/create", multer.single("user-img-upload"), async (req, res) => {
   //Check HTML Form Data for valid input
-  const { email, firstname, lastname } = req.body;
   const { error } = validateNewUser(req.body);
   if (error) {
     res.status(400).render("createUser", {
@@ -66,8 +66,11 @@ router.post("/create", async (req, res) => {
     });
     return;
   }
+  //Destructuring data
+  const { email, firstname, lastname, usertype } = req.body;
+  const photo = req.file.filename;
   try {
-    await userDAO.create(req.body);
+    await userDAO.create({ email, photo, firstname, lastname, usertype });
     //Redirect to users
     res.redirect("/users");
   } catch (err) {

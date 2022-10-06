@@ -1,5 +1,9 @@
-const { getConnection } = require("../helper/dbConnectionHelper");
+const fs = require("fs");
 const mysql = require("mysql");
+const path = require("path");
+
+const { getConnection } = require("../helper/dbConnectionHelper");
+const { readFile } = require("../helper/fileReader");
 
 module.exports = {
   getAll: () => {
@@ -53,24 +57,41 @@ module.exports = {
     });
   },
 
-  create: (user) => {
+  create: async (user) => {
     const connection = getConnection();
     if (!connection) return false;
-    return new Promise((resolve, rej) => {
-      try {
+    if (!user.photo) {
+      const query = new Promise((res, rej) => {
         connection.query(
           `INSERT INTO USER (email,firstname,lastname,user_type) VALUES ('${user.email}','${user.firstname}','${user.lastname}','${user.usertype}');`,
           (error, results, fields) => {
-            if (error) rej(error);
-            resolve(results);
+            if (!error) res(results);
           }
         );
-      } catch (error) {
-        rej(error);
+      });
+      return query;
+    } else {
+      try {
+        const photo = await readFile(`./tmp_uploads/${user.photo}`);
+        const query = new Promise((res, rej) => {
+          connection.query(
+            //`INSERT INTO USER (email,photo,firstname,lastname,user_type) VALUES ('${user.email}',${data},'${user.firstname}','${user.lastname}','${user.usertype}');`,
+            `INSERT INTO USER (email, photo,firstname,lastname,user_type) VALUES (?,?,?,?,?)`,
+            [user.email, photo, user.firstname, user.lastname, user.usertype],
+            (error, results, fields) => {
+              if (!error) res(results);
+              rej(error);
+            }
+          );
+        });
+        return query;
+      } catch (err) {
+        return Promise.reject(err);
       } finally {
+        fs.unlinkSync(`./tmp_uploads/${user.photo}`);
         connection.end();
       }
-    });
+    }
   },
 
   update: (id, firstname, lastname) => {

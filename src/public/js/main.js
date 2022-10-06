@@ -1,6 +1,10 @@
 const btnUpdate = document.querySelectorAll(".btn-update");
 const btnDelete = document.querySelectorAll(".btn-delete");
+const userImg = document.querySelector(".user-img");
+const userImgUpload = document.getElementById("user-img-upload");
+const userImgMessage = document.getElementById("user-img-message");
 
+//Update user data - Ajax
 btnUpdate.forEach((btn) =>
   btn.addEventListener("click", async (e) => {
     //Get selected user data
@@ -38,6 +42,20 @@ btnUpdate.forEach((btn) =>
   })
 );
 
+async function updateUser(user) {
+  try {
+    const response = await fetch(`/users/${user.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+    return response;
+  } catch (error) {
+    return error;
+  }
+}
+
+//Delete user data - Ajax
 btnDelete.forEach((btn) =>
   btn.addEventListener("click", async (e) => {
     //Get selected user ID
@@ -57,21 +75,6 @@ btnDelete.forEach((btn) =>
   })
 );
 
-//Update user data
-async function updateUser(user) {
-  try {
-    const response = await fetch(`/users/${user.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
-    return response;
-  } catch (error) {
-    return error;
-  }
-}
-
-//Delete user data
 async function deleteUser(id) {
   try {
     const response = await fetch(`/users/${id}`, {
@@ -82,4 +85,48 @@ async function deleteUser(id) {
   } catch (error) {
     return error;
   }
+}
+
+//User profile image select
+userImgUpload.addEventListener("change", userImgFileHandler);
+
+function userImgFileHandler(event) {
+  //Check if a file has been selected
+  if (event.target.files.length === 0) return;
+  //Get selected image. Check data type
+  const profileImg = event.target.files[0];
+  if (!checkFileType(event.target.files[0].type)) {
+    userImgMessage.textContent = "Please select an image file.";
+    return;
+  }
+  //Check size
+  if (profileImg.size > 200000) {
+    userImgMessage.textContent = "Max supported image size: < 200Kb.";
+    return;
+  }
+  //Select & remove default avatar
+  const avatar = document.querySelector(".avatar");
+  if (avatar) avatar.remove();
+  //Create image
+  const image = document.createElement("img");
+  image.src = URL.createObjectURL(profileImg);
+  userImg.appendChild(image);
+}
+
+//Check file type for user profile image
+function checkFileType(type) {
+  const fileTypes = [
+    "image/apng",
+    "image/bmp",
+    "image/jpg",
+    "image/gif",
+    "image/jpeg",
+    "image/pjpeg",
+    "image/png",
+    "image/svg+xml",
+    "image/tiff",
+    "image/webp",
+    "image/x-icon",
+  ];
+  return fileTypes.includes(type);
 }
