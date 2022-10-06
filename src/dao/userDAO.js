@@ -4,6 +4,7 @@ const path = require("path");
 
 const { getConnection } = require("../helper/dbConnectionHelper");
 const { readFile } = require("../helper/fileReader");
+const imageCheck = require("../helper/imageCheck");
 
 module.exports = {
   getAll: () => {
@@ -72,7 +73,9 @@ module.exports = {
       return query;
     } else {
       try {
-        const photo = await readFile(`./tmp_uploads/${user.photo}`);
+        //Check MIME Type of uploaded data
+        if (!imageCheck(user.photo.mimetype)) return;
+        const photo = await readFile(`./tmp_uploads/${user.photo.filename}`);
         const query = new Promise((res, rej) => {
           connection.query(
             //`INSERT INTO USER (email,photo,firstname,lastname,user_type) VALUES ('${user.email}',${data},'${user.firstname}','${user.lastname}','${user.usertype}');`,
@@ -88,7 +91,7 @@ module.exports = {
       } catch (err) {
         return Promise.reject(err);
       } finally {
-        fs.unlinkSync(`./tmp_uploads/${user.photo}`);
+        fs.unlinkSync(`./tmp_uploads/${user.photo.filename}`);
         connection.end();
       }
     }

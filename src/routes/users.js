@@ -39,7 +39,6 @@ router.get("/create/", async (req, res) => {
 });
 
 //POST
-//*******TODO -> Form contains data after invalid submit/validation*****************
 //Create new user
 router.post("/create", multer.single("user-img-upload"), async (req, res) => {
   //Check HTML Form Data for valid input
@@ -68,7 +67,7 @@ router.post("/create", multer.single("user-img-upload"), async (req, res) => {
   }
   //Destructuring data
   const { email, firstname, lastname, usertype } = req.body;
-  const photo = req.file.filename;
+  const photo = req.file;
   try {
     await userDAO.create({ email, photo, firstname, lastname, usertype });
     //Redirect to users

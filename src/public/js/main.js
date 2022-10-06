@@ -95,10 +95,12 @@ function userImgFileHandler(event) {
   if (event.target.files.length === 0) return;
   //Get selected image. Check data type
   const profileImg = event.target.files[0];
+
   if (!checkFileType(event.target.files[0].type)) {
     userImgMessage.textContent = "Please select an image file.";
     return;
   }
+
   //Check size
   if (profileImg.size > 200000) {
     userImgMessage.textContent = "Max supported image size: < 200Kb.";
@@ -108,6 +110,7 @@ function userImgFileHandler(event) {
   const avatar = document.querySelector(".avatar");
   if (avatar) avatar.remove();
   //Create image
+
   const image = document.createElement("img");
   image.src = URL.createObjectURL(profileImg);
   userImg.appendChild(image);
