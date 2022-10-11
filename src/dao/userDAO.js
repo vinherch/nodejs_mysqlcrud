@@ -75,10 +75,9 @@ module.exports = {
       try {
         //Check MIME Type of uploaded data
         if (!imageCheck(user.photo.mimetype)) return;
-        const photo = await readFile(`./tmp_uploads/${user.photo.filename}`);
+        const photo = `/res/img/${user.photo.filename}`;
         const query = new Promise((res, rej) => {
           connection.query(
-            //`INSERT INTO USER (email,photo,firstname,lastname,user_type) VALUES ('${user.email}',${data},'${user.firstname}','${user.lastname}','${user.usertype}');`,
             `INSERT INTO USER (email, photo,firstname,lastname,user_type) VALUES (?,?,?,?,?)`,
             [user.email, photo, user.firstname, user.lastname, user.usertype],
             (error, results, fields) => {
@@ -87,11 +86,11 @@ module.exports = {
             }
           );
         });
+
         return query;
       } catch (err) {
         return Promise.reject(err);
       } finally {
-        fs.unlinkSync(`./tmp_uploads/${user.photo.filename}`);
         connection.end();
       }
     }

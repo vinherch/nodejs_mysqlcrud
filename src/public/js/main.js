@@ -9,11 +9,12 @@ btnUpdate.forEach((btn) =>
   btn.addEventListener("click", async (e) => {
     //Get selected user data
     const record = btn.parentElement.parentElement;
-    const id = btn.parentElement.parentElement.querySelector(".user-id").innerHTML;
-    const email = btn.parentElement.parentElement.querySelector(".user-email").innerHTML;
-    const firstname = btn.parentElement.parentElement.querySelector(".user-fn").innerHTML;
-    const lastname = btn.parentElement.parentElement.querySelector(".user-ln").innerHTML;
-    const updated = btn.parentElement.parentElement.querySelector(".user-updated");
+    const id = btn.parentElement.parentElement.querySelector(".td-user-id").innerHTML;
+    const photo = btn.parentElement.parentElement.querySelector(".td-user-photo");
+    const email = btn.parentElement.parentElement.querySelector(".td-user-email").innerHTML;
+    const firstname = btn.parentElement.parentElement.querySelector(".td-user-fn").innerHTML;
+    const lastname = btn.parentElement.parentElement.querySelector(".td-user-ln").innerHTML;
+    const updated = btn.parentElement.parentElement.querySelector(".td-user-updated");
     //Ajax request
     await updateUser({ id, email, firstname, lastname })
       .then((response) => {
@@ -110,7 +111,6 @@ function userImgFileHandler(event) {
   const avatar = document.querySelector(".avatar");
   if (avatar) avatar.remove();
   //Create image
-
   const image = document.createElement("img");
   image.src = URL.createObjectURL(profileImg);
   userImg.appendChild(image);

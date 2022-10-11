@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
+      <th scope="col">Photo</th>
       <th scope="col">Email</th>
       <th scope="col">Firstname</th>
       <th scope="col">Lastname</th>
@@ -13,13 +14,14 @@
   <tbody>
     <%if (Array.isArray(result)) { for (rec of result) { %> <% %>
     <tr class="record">
-      <th class="user-id"><%= rec.id%></th>
-      <td class="user-email"><%= rec.email%></td>
-      <td contenteditable="true" class="user-fn"><%= rec.firstname%></td>
-      <td contenteditable="true" class="user-ln"><%= rec.lastname%></td>
-      <td class="user-type"><%= rec.user_type%></td>
-      <td class="user-created"><%= rec.created%></td>
-      <td class="user-updated"><%= rec.updated%></td>
+      <th class="th-user-id"><%= rec.id%></th>
+      <td class="td-user-photo"><% if(rec.photo){ const src = rec.photo;; %> <img src="<%=src%>" alt="" /> <% } %></td>
+      <td class="td-user-email"><%= rec.email%></td>
+      <td contenteditable="true" class="td-user-fn"><%= rec.firstname%></td>
+      <td contenteditable="true" class="td-user-ln"><%= rec.lastname%></td>
+      <td class="td-user-type"><%= rec.user_type%></td>
+      <td class="td-user-created"><%= rec.created%></td>
+      <td class="td-user-updated"><%= rec.updated%></td>
       <td>
         <a href="/users/create" class="btn btn-primary btn-create">Create</a>
       </td>

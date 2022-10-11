@@ -1,5 +1,6 @@
+const dotenv = require("dotenv").config({ path: `${__dirname}/config/.env` });
 const router = require("express").Router();
-const multer = require("multer")({ dest: "tmp_uploads/" });
+const multer = require("multer")({ dest: "./public/res/img" });
 
 const userDAO = require("../dao/userDAO");
 const { validateNewUser } = require("../validation/validation");

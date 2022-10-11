@@ -1,6 +1,9 @@
 #Todo
 todo.txt
 
+#Image Uploads
+public/res/*
+
 # Logs
 logs
 *.log
