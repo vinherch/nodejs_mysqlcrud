@@ -1,20 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap");
+
+/* General Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
+  --fnt-fam-main: "Roboto Condensed", sans-serif;
+  --header-sitedesc-fn-shadow: 2px 2px 5px rgb(77, 77, 77);
+  --header-bg-clr: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
+  --header-logo-fs: 1.5rem;
+  --header-logo-fs-mobile: 1.2rem;
+  --header-fn-clr: #fff;
+  --container-l-width: 90%;
+  --container-md-width: 100%;
+  --container-max-height: 70vh;
+  --container-min-height: 10rem;
+  --footer-bg-clr: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
+  --footer-fn-clr: #fff;
   --cl-success: rgb(170, 255, 170);
   --cl-error: rgb(255, 170, 170);
 }
 
-header {
-  min-height: 15vh;
-  width: 100vw;
-  background-image: linear-gradient(90deg, rgb(112, 112, 112), rgb(206, 206, 206));
-  position: sticky;
-  top: 0;
+html {
+  font-family: var(--fnt-fam-main);
 }
 
+body {
+  overflow: hidden;
+  max-width: 100vw;
+  overflow-y: scroll;
+  min-height: 30rem;
+}
+
+/* Header */
+header {
+  min-height: 20vh;
+  width: 100vw;
+  background-image: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
+  position: sticky;
+  top: 0;
+  color: var(--header-fn-clr);
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.header-logo {
+  flex: 1;
+  font-size: var(--header-logo-fs);
+}
+
+.site-desc {
+  flex: 1;
+  text-align: center;
+}
+
+.site-desc > h4 {
+  font-size: 2rem;
+  text-shadow: var(--header-sitedesc-fn-shadow);
+  letter-spacing: 1px;
+}
+
+.new-user {
+  flex: 1;
+  text-align: end;
+}
+
+.new-user a {
+  text-decoration: none;
+  color: var(--header-fn-clr);
+  padding: 1rem;
+  border: 1px solid var(--header-fn-clr);
+}
+
+.new-user a:hover {
+  color: #000;
+  background-color: var(--header-fn-clr);
+}
+
+/***********************************************************/
+
+/* User Ovierview */
+.container {
+  max-width: var(--container-l-width);
+  max-height: var(--container-max-height);
+  margin: 0 auto;
+  padding: 2rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.tbl-user {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border-spacing: 0;
+}
+
+.tbl-user tr:nth-child(even) {
+  background-color: #eee;
+}
+
+.tbl-user tbody tr:hover {
+  background-color: #ccc;
+}
+
+.tbl-user thead {
+  background-color: #ddd;
+}
+
+.tbl-user thead th {
+  padding: 1rem 0rem;
+}
+
+.tbl-user td,
+th {
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.btn-create,
+.btn-update,
+.btn-delete {
+  text-decoration: none;
+  color: #000;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--fnt-fam-main) !important;
+  font-size: 1rem;
+}
+
+.mobile-view {
+  display: none;
+}
+
+/***********************************************************/
+
+/* Footer */
 footer {
   width: 100vw;
   font-size: x-small;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  padding: 1rem;
+  background-image: var(--footer-bg-clr);
+  color: var(--footer-fn-clr);
 }
+
+/***********************************************************/
 
 .form-container {
   width: 100%;
@@ -26,6 +167,7 @@ footer {
   position: relative;
 }
 
+/*
 .record {
   transition: all 5s ease;
 }
@@ -38,7 +180,33 @@ footer {
   animation: error 2000ms ease-in-out alternate-reverse;
 }
 
-/* Create User */
+*/
+
+/*Users overview*/
+.record {
+  height: 3rem;
+  padding: 0.2rem;
+  max-height: 3rem;
+}
+
+.td-user-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 3rem;
+  max-height: 3rem;
+}
+
+.td-user-photo img {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+}
+
+/***********************************************************/
+
+/* Create User Form */
 .user-img-container {
   margin: 0 auto;
   min-height: 10rem;
@@ -111,7 +279,9 @@ input[type="file"] {
   max-width: 30rem;
 }
 
-/* animations */
+/***********************************************************/
+
+/* Animations */
 @keyframes success {
   0% {
   }
@@ -129,4 +299,169 @@ input[type="file"] {
   }
   100% {
   }
+}
+
+/***********************************************************/
+
+/* Media Queries */
+
+/* Container - User Ovierview */
+@media screen and (max-width: 1280px) {
+  .container {
+    max-width: var(--container-md-width);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .tbl-user,
+  .btn-create,
+  .btn-update,
+  .btn-delete {
+    /*font size calc - TODO*/
+    font-size: small;
+  }
+}
+
+/***********************************************************/
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  header {
+    min-height: 20vh;
+    width: 100vw;
+    background-image: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
+    position: sticky;
+    top: 0;
+    color: var(--header-fn-clr);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  /* Header */
+  .header-logo {
+    flex: 1;
+    font-size: var(--header-logo-fs-mobile);
+  }
+
+  .site-desc {
+    flex: 1;
+    text-align: center;
+  }
+
+  .site-desc > h4 {
+    font-size: 1rem;
+    text-shadow: var(--header-sitedesc-fn-shadow);
+    letter-spacing: 1px;
+  }
+
+  .new-user {
+    flex: 1;
+    text-align: end;
+  }
+
+  .new-user a {
+    text-decoration: none;
+    color: var(--header-fn-clr);
+    padding: 0.5rem;
+    border: 1px solid var(--header-fn-clr);
+    font-size: 0.8rem;
+  }
+
+  .new-user a:hover {
+    color: #000;
+    background-color: var(--header-fn-clr);
+  }
+
+  /***********************************************************/
+
+  /* User Ovierview */
+  .container {
+    padding: 1rem;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .tbl-user {
+    display: none;
+  }
+
+  .mobile-view {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mb-user-card {
+    overflow: hidden;
+    min-height: 10rem;
+    box-shadow: 3px 3px 5px rgb(111, 111, 111, 0.3);
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .mb-user-card a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .mb-user-card-photo-container {
+    padding: 0.3rem;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .mb-user-card-photo {
+    border-radius: 100%;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px rgb(111, 111, 111, 0.3);
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .mb-user-card-photo img {
+    object-fit: cover;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .mb-user-card-data {
+    margin-top: auto;
+    padding: 0.3rem;
+    margin-top: 1rem;
+    flex: 1;
+    pointer-events: none;
+  }
+
+  .mb-user-fullname {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .mb-user-email {
+    font-size: smaller;
+  }
+
+  /***********************************************************/
+
+  /* Footer */
+  footer {
+    width: 100vw;
+    font-size: x-small;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding: 1rem;
+    background-image: var(--footer-bg-clr);
+    color: var(--footer-fn-clr);
+  }
+
+  /***********************************************************/
 }

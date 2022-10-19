@@ -1,21 +1,24 @@
-<table class="table table-sm table-striped table-hover mt-5">
+<table class="tbl-user">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Photo</th>
-      <th scope="col">Email</th>
-      <th scope="col">Firstname</th>
-      <th scope="col">Lastname</th>
-      <th scope="col">Type</th>
-      <th scope="col">Created</th>
-      <th scope="col">Updated</th>
+      <th>ID</th>
+      <th>Photo</th>
+      <th>Email</th>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Type</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <%if (Array.isArray(result)) { for (rec of result) { %> <% %>
     <tr class="record">
       <th class="th-user-id"><%= rec.id%></th>
-      <td class="td-user-photo"><% if(rec.photo){ const src = rec.photo;; %> <img src="<%=src%>" alt="" /> <% } %></td>
+      <td class="td-user-photo"><% if(rec.photo){ const src = rec.photo; %> <img src="<%=src%>" alt="" /> <% } %></td>
       <td class="td-user-email"><%= rec.email%></td>
       <td contenteditable="true" class="td-user-fn"><%= rec.firstname%></td>
       <td contenteditable="true" class="td-user-ln"><%= rec.lastname%></td>
@@ -23,13 +26,13 @@
       <td class="td-user-created"><%= rec.created%></td>
       <td class="td-user-updated"><%= rec.updated%></td>
       <td>
-        <a href="/users/create" class="btn btn-primary btn-create">Create</a>
+        <a href="/users/create" class="btn btn-create">Create</a>
       </td>
       <td>
-        <button class="btn btn-primary btn-update">Update</button>
+        <button class="btn btn-update">Update</button>
       </td>
       <td>
-        <button class="btn btn-secondary btn-delete">Delete</button>
+        <button class="btn btn-delete">Delete</button>
       </td>
     </tr>
     <% }} else { %>
@@ -37,3 +40,23 @@
     <%}%>
   </tbody>
 </table>
+
+<!-- Mobile View -->
+<div class="mobile-view">
+  <% if (Array.isArray(result)) { for (rec of result) { %>
+  <div class="mb-user-card">
+    <a href="/test">
+      <div class="mb-user-card-photo-container">
+        <div class="mb-user-card-photo"><% if (rec.photo) { const src = rec.photo; %><img src="<%=src%>" alt="" /> <% } %></div>
+      </div>
+      <div class="mb-user-card-data">
+        <div class="mb-user-fullname">
+          <div class="mb-user-firstname"><p><%=rec.firstname%></p></div>
+          <div class="mb-user-lastname"><p><%=rec.lastname%></p></div>
+        </div>
+        <div class="mb-user-email"><p><%=rec.email%></p></div>
+      </div>
+    </a>
+  </div>
+  <%} }%>
+</div>
