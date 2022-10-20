@@ -366,6 +366,7 @@ input[type="file"] {
     padding: 0.5rem;
     border: 1px solid var(--header-fn-clr);
     font-size: 0.8rem;
+    transition: background-color 300ms ease;
   }
 
   .new-user a:hover {
@@ -402,11 +403,52 @@ input[type="file"] {
     flex-direction: column;
     padding: 0.5rem;
     cursor: pointer;
+    position: relative;
   }
 
-  .mb-user-card a {
-    color: #000;
+  .blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    opacity: 0.3;
+  }
+
+  .mb-user-card-control {
+    z-index: 2;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(41, 41, 41, 0.7);
+    transition: width 500ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .mb-user-card-control a {
     text-decoration: none;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+    height: 3rem;
+    border: 1px solid white;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 300ms ease;
+  }
+
+  .mb-user-card-control a:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .mb-user-card-control-expand {
+    width: 100%;
   }
 
   .mb-user-card-photo-container {

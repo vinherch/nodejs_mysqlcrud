@@ -20,8 +20,8 @@
       <th class="th-user-id"><%= rec.id%></th>
       <td class="td-user-photo"><% if(rec.photo){ const src = rec.photo; %> <img src="<%=src%>" alt="" /> <% } %></td>
       <td class="td-user-email"><%= rec.email%></td>
-      <td contenteditable="true" class="td-user-fn"><%= rec.firstname%></td>
-      <td contenteditable="true" class="td-user-ln"><%= rec.lastname%></td>
+      <td class="td-user-firstname"><%= rec.firstname%></td>
+      <td class="td-user-lastname"><%= rec.lastname%></td>
       <td class="td-user-type"><%= rec.user_type%></td>
       <td class="td-user-created"><%= rec.created%></td>
       <td class="td-user-updated"><%= rec.updated%></td>
@@ -45,7 +45,12 @@
 <div class="mobile-view">
   <% if (Array.isArray(result)) { for (rec of result) { %>
   <div class="mb-user-card">
-    <a href="/test">
+    <div class="mb-user-card-control">
+      <div><a href="/users/details/<%=rec.id%>">Details</a></div>
+      <div><a href="/users/details/<%=rec.id%>">Update</a></div>
+      <div><a href="#">Delete</a></div>
+    </div>
+    <div class="mb-user-card-container">
       <div class="mb-user-card-photo-container">
         <div class="mb-user-card-photo"><% if (rec.photo) { const src = rec.photo; %><img src="<%=src%>" alt="" /> <% } %></div>
       </div>
@@ -56,7 +61,7 @@
         </div>
         <div class="mb-user-email"><p><%=rec.email%></p></div>
       </div>
-    </a>
+    </div>
   </div>
   <%} }%>
 </div>

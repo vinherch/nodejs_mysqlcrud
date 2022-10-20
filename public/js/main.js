@@ -3,6 +3,7 @@ const btnDelete = document.querySelectorAll(".btn-delete");
 const userImg = document.querySelector(".user-img");
 const userImgUpload = document.getElementById("user-img-upload");
 const userImgMessage = document.getElementById("user-img-message");
+const mobileUserCards = document.querySelectorAll(".mb-user-card");
 
 //Update user data - Ajax
 btnUpdate.forEach((btn) =>
@@ -89,7 +90,7 @@ async function deleteUser(id) {
 }
 
 //User profile image select
-userImgUpload.addEventListener("change", userImgFileHandler);
+//userImgUpload.addEventListener("change", userImgFileHandler);
 
 function userImgFileHandler(event) {
   //Check if a file has been selected
@@ -133,3 +134,11 @@ function checkFileType(type) {
   ];
   return fileTypes.includes(type);
 }
+
+//Mobile View User Edit
+mobileUserCards.forEach((element) => {
+  element.addEventListener("click", (ev) => {
+    element.children[0].classList.toggle("mb-user-card-control-expand");
+    element.children[1].classList.toggle("blurred");
+  });
+});
