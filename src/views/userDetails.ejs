@@ -1,6 +1,10 @@
 <div class="user-details-container">
   <div class="user-details-photo">
+    <% if (result[0].photo) { %>
     <img src="<%= result[0].photo %>" alt="" />
+    <% } else { %>
+    <i class="fa-solid fa-user-tie avatar-detail"></i>
+    <%} %>
   </div>
   <div class="user-details-data">
     <div class="user-details-fullname">

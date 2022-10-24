@@ -18,7 +18,10 @@
     <%if (Array.isArray(result)) { for (rec of result) { %> <% %>
     <tr class="record">
       <th class="th-user-id"><%= rec.id%></th>
-      <td class="td-user-photo"><% if(rec.photo){ const src = rec.photo; %> <img src="<%=src%>" alt="" /> <% } %></td>
+      <td class="td-user-photo">
+        <% if(rec.photo){ const src = rec.photo; %> <img src="<%=src%>" alt="" /> <% } else { %>
+        <i class="fa-solid fa-user-tie avatar-list"></i> <%} %>
+      </td>
       <td class="td-user-email"><%= rec.email%></td>
       <td class="td-user-firstname"><%= rec.firstname%></td>
       <td class="td-user-lastname"><%= rec.lastname%></td>
@@ -52,7 +55,10 @@
     </div>
     <div class="mb-user-card-container">
       <div class="mb-user-card-photo-container">
-        <div class="mb-user-card-photo"><% if (rec.photo) { const src = rec.photo; %><img src="<%=src%>" alt="" /> <% } %></div>
+        <div class="mb-user-card-photo">
+          <% if (rec.photo) { const src = rec.photo; %><img src="<%=src%>" alt="" /><% } else { %>
+          <i class="fa-solid fa-user-tie avatar-list"></i> <%} %>
+        </div>
       </div>
       <div class="mb-user-card-data">
         <div class="mb-user-fullname">
