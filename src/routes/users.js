@@ -27,7 +27,7 @@ router.get("/details/:id", async (req, res) => {
       res.status(404).render("users", { result: "User ID not found!" });
       return;
     }
-    res.render("users", { result });
+    res.render("userDetails", { result });
   } catch (err) {
     res.status(500).json(err);
   }

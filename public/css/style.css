@@ -491,6 +491,80 @@ input[type="file"] {
     font-size: smaller;
   }
 
+  /* User Detail View */
+  .user-details-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 30rem;
+    color: #777;
+  }
+
+  .user-details-photo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .user-details-photo img {
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+
+  .user-details-data {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-details-fullname {
+    display: flex;
+    gap: 0.3rem;
+    font-size: 1.5rem;
+    color: rgb(61, 61, 61);
+    font-weight: bolder;
+    justify-content: center;
+  }
+
+  .user-details-email {
+    align-self: center;
+  }
+
+  .user-details-type,
+  .user-details-timestamp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+
+  .user-details-type {
+    margin-top: 0.5rem;
+  }
+
+  .user-details-timestamp {
+    flex-direction: column;
+    flex: 1;
+
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .user-details-timestamp > * {
+    width: 100%;
+  }
+
+  .user-details-created,
+  .user-details-updated {
+    gap: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
   /***********************************************************/
 
   /* Footer */

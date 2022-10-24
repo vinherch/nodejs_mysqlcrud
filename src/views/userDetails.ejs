@@ -1,0 +1,19 @@
+<div class="user-details-container">
+  <div class="user-details-photo">
+    <img src="<%= result[0].photo %>" alt="" />
+  </div>
+  <div class="user-details-data">
+    <div class="user-details-fullname">
+      <p class="user-details-firstname"><%= result[0].firstname %></p>
+      <p class="user-details-lastname"><%= result[0].lastname %></p>
+    </div>
+    <div class="user-details-email"><p><%= result[0].email %></p></div>
+    <div class="user-details-type">
+      <p class="user-details-usertype">usertype: <%= result[0].user_type %></p>
+    </div>
+    <div class="user-details-timestamp">
+      <p class="user-details-created">created: <span><%= result[0].created %></span></p>
+      <p class="user-details-updated">updated: <span><%= result[0].updated %></span></p>
+    </div>
+  </div>
+</div>
