@@ -213,22 +213,88 @@ footer {
 
 /***********************************************************/
 
-/* Create User Form */
-.user-img-container {
-  margin: 0 auto;
-  min-height: 10rem;
-  min-width: 10rem;
-  width: 70%;
+/* User Create Form */
+.crt-user-form-container {
+  margin: auto;
+  max-width: 70rem;
+  height: 50vh;
+}
+
+.crt-user-img {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15rem;
+  width: 50%;
+  margin: auto;
+  position: relative;
+}
+
+.crt-user-avatar {
+  font-size: 10rem;
+  color: var(--clr-avatar);
+}
+
+.crt-user-form {
+  height: 100%;
+}
+
+.crt-user-data {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.user-img-container::before {
+.crt-user-email-group,
+.crt-user-firstname-group,
+.crt-user-lastname-group,
+.crt-user-type-group {
+  margin: auto;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.crt-user-email-group input,
+.crt-user-firstname-group input,
+.crt-user-lastname-group input,
+.crt-user-type-group select {
+  padding: 0.5rem;
+  width: 80%;
+  font-size: 1rem;
+}
+
+.crt-user-submit {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.crt-user-submit button {
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #999;
+  padding: 1rem 3rem;
+  width: 100%;
+  box-shadow: 2px 2px 5px #999;
+}
+
+.crt-user-submit button:hover {
+  color: #fff;
+  background-color: #999;
+}
+
+.crt-user-img::before {
   content: "Click to add an image ...";
   position: absolute;
-  left: 70%;
-  top: 10%;
+  left: 60%;
+  top: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -244,7 +310,7 @@ footer {
   z-index: 2;
 }
 
-.user-img-container:hover::before {
+.crt-user-img:hover::before {
   opacity: 1;
 }
 
