@@ -30,9 +30,10 @@ app.set("view engine", "ejs");
 
 //Static folder
 app.use(express.static("public"));
-app.use("/css", express.static("./public/css"));
-app.use("/res", express.static("./public/res"));
-app.use("/js", express.static("./public/js"));
+app.use("/css", express.static("./src/public/css"));
+app.use("/res", express.static("./src/public/res"));
+app.use("/js", express.static("./src/public/js"));
+app.use("/profile_img", express.static("./profile_img/"));
 
 //Logging
 app.use(morgan("dev"));

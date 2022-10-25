@@ -1,21 +1,20 @@
-const btnUpdate = document.querySelectorAll(".btn-update");
-const btnDelete = document.querySelectorAll(".btn-delete");
-const userImg = document.querySelector(".user-img");
-const userImgUpload = document.getElementById("user-img-upload");
-const userImgMessage = document.getElementById("user-img-message");
+const usersBtnUpdate = document.querySelectorAll(".users-btn-update");
+const usersBtnDelete = document.querySelectorAll(".users-btn-delete");
+
+const crtUserImgUpload = document.getElementById("crt-user-img-upload");
+const crtUserImg = document.getElementById("crt-user-img");
+const userImgMessage = document.getElementById("crt-user-img-msg");
 const mobileUserCards = document.querySelectorAll(".mb-user-card");
 
-//Update user data - Ajax
-btnUpdate.forEach((btn) =>
+//User overview - update user data
+usersBtnUpdate.forEach((btn) =>
   btn.addEventListener("click", async (e) => {
-    //Get selected user data
     const record = btn.parentElement.parentElement;
-    const id = btn.parentElement.parentElement.querySelector(".td-user-id").innerHTML;
-    const photo = btn.parentElement.parentElement.querySelector(".td-user-photo");
-    const email = btn.parentElement.parentElement.querySelector(".td-user-email").innerHTML;
-    const firstname = btn.parentElement.parentElement.querySelector(".td-user-fn").innerHTML;
-    const lastname = btn.parentElement.parentElement.querySelector(".td-user-ln").innerHTML;
-    const updated = btn.parentElement.parentElement.querySelector(".td-user-updated");
+    const id = btn.parentElement.parentElement.querySelector(".users-th-id").innerHTML;
+    const email = btn.parentElement.parentElement.querySelector(".users-td-email").innerHTML;
+    const firstname = btn.parentElement.parentElement.querySelector(".users-td-firstname").innerHTML;
+    const lastname = btn.parentElement.parentElement.querySelector(".users-td-lastname").innerHTML;
+    const updated = btn.parentElement.parentElement.querySelector(".users-td-updated");
     //Ajax request
     await updateUser({ id, email, firstname, lastname })
       .then((response) => {
@@ -36,9 +35,9 @@ btnUpdate.forEach((btn) =>
       .catch((error) => {
         console.log(error);
         //Error animation
-        record.classList.add("record-error");
+        record.classList.add("users-record-error");
         record.addEventListener("animationend", () => {
-          record.classList.remove("record-error");
+          record.classList.remove("users-record-error");
         });
       });
   })
@@ -58,11 +57,11 @@ async function updateUser(user) {
 }
 
 //Delete user data - Ajax
-btnDelete.forEach((btn) =>
+usersBtnDelete.forEach((btn) =>
   btn.addEventListener("click", async (e) => {
-    //Get selected user ID
+    //Get user
     const record = btn.parentElement.parentElement;
-    const id = btn.parentElement.parentElement.querySelector(".user-id").innerHTML;
+    const id = btn.parentElement.parentElement.querySelector(".users-th-id").innerHTML;
     //Ajax request
     await deleteUser(id)
       .then((response) => {
@@ -89,14 +88,14 @@ async function deleteUser(id) {
   }
 }
 
-//User profile image select
-//userImgUpload.addEventListener("change", userImgFileHandler);
+//User image select
+crtUserImgUpload.addEventListener("change", userImgFileHandler);
 
 function userImgFileHandler(event) {
   //Check if a file has been selected
   if (event.target.files.length === 0) return;
   //Get selected image. Check data type
-  const profileImg = event.target.files[0];
+  const userImg = event.target.files[0];
 
   if (!checkFileType(event.target.files[0].type)) {
     userImgMessage.textContent = "Please select an image file.";
@@ -104,17 +103,17 @@ function userImgFileHandler(event) {
   }
 
   //Check size
-  if (profileImg.size > 200000) {
+  if (userImg.size > 200000) {
     userImgMessage.textContent = "Max supported image size: < 200Kb.";
     return;
   }
   //Select & remove default avatar
-  const avatar = document.querySelector(".avatar");
+  const avatar = document.querySelector(".crt-user-avatar");
   if (avatar) avatar.remove();
   //Create image
   const image = document.createElement("img");
-  image.src = URL.createObjectURL(profileImg);
-  userImg.appendChild(image);
+  image.src = URL.createObjectURL(userImg);
+  crtUserImg.appendChild(image);
 }
 
 //Check file type for user profile image

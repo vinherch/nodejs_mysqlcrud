@@ -126,9 +126,9 @@ th {
   text-align: center;
 }
 
-.btn-create,
-.btn-update,
-.btn-delete {
+.users-btn-create,
+.users-btn-update,
+.users-btn-delete {
   text-decoration: none;
   color: #000;
   border: none;
@@ -168,20 +168,17 @@ footer {
   position: relative;
 }
 
-/*
-.record {
+.users-record {
   transition: all 5s ease;
 }
 
-.record-success {
+.users-record-success {
   animation: success 2000ms ease-in-out alternate-reverse;
 }
 
-.record-error {
+.users-record-error {
   animation: error 2000ms ease-in-out alternate-reverse;
 }
-
-*/
 
 /*Users overview*/
 .record {
@@ -190,7 +187,7 @@ footer {
   max-height: 3rem;
 }
 
-.td-user-photo {
+.users-td-photo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -199,7 +196,7 @@ footer {
   max-height: 3rem;
 }
 
-.td-user-photo img,
+.users-td-photo img,
 .avatar-list {
   height: 2rem;
   width: 2rem;
@@ -220,7 +217,7 @@ footer {
   height: 50vh;
 }
 
-.crt-user-img {
+.crt-user-img-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,6 +230,11 @@ footer {
 .crt-user-avatar {
   font-size: 10rem;
   color: var(--clr-avatar);
+}
+
+#crt-user-img img {
+  max-width: 15rem;
+  object-fit: cover;
 }
 
 .crt-user-form {
