@@ -16,26 +16,26 @@
   </thead>
   <tbody>
     <%if (Array.isArray(result)) { for (rec of result) { %> <% %>
-    <tr class="record">
-      <th class="th-user-id"><%= rec.id%></th>
-      <td class="td-user-photo">
+    <tr class="users-record">
+      <th class="users-th-id"><%= rec.id%></th>
+      <td class="users-td-photo">
         <% if(rec.photo){ const src = rec.photo; %> <img src="<%=src%>" alt="" /> <% } else { %>
         <i class="fa-solid fa-user-tie avatar-list"></i> <%} %>
       </td>
-      <td class="td-user-email"><%= rec.email%></td>
-      <td class="td-user-firstname"><%= rec.firstname%></td>
-      <td class="td-user-lastname"><%= rec.lastname%></td>
-      <td class="td-user-type"><%= rec.user_type%></td>
-      <td class="td-user-created"><%= rec.created%></td>
-      <td class="td-user-updated"><%= rec.updated%></td>
+      <td class="users-td-email"><%= rec.email%></td>
+      <td class="users-td-firstname"><%= rec.firstname%></td>
+      <td class="users-td-lastname"><%= rec.lastname%></td>
+      <td class="users-td-type"><%= rec.user_type%></td>
+      <td class="users-td-created"><%= rec.created%></td>
+      <td class="users-td-updated"><%= rec.updated%></td>
       <td>
-        <a href="/users/create" class="btn btn-create">Create</a>
+        <a href="/users/create" class="users-btn-create">Create</a>
       </td>
       <td>
-        <button class="btn btn-update">Update</button>
+        <button class="users-btn-update">Update</button>
       </td>
       <td>
-        <button class="btn btn-delete">Delete</button>
+        <button class="users-btn-delete">Delete</button>
       </td>
     </tr>
     <% }} else { %>

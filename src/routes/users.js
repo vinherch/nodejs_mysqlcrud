@@ -1,6 +1,6 @@
 const dotenv = require("dotenv").config({ path: `${__dirname}/config/.env` });
 const router = require("express").Router();
-const multer = require("multer")({ dest: "./public/res/img" });
+const multer = require("multer")({ dest: "./profile_img" });
 
 const userDAO = require("../dao/userDAO");
 const { validateNewUser } = require("../validation/validation");
@@ -41,16 +41,20 @@ router.get("/create/", async (req, res) => {
 
 //POST
 //Create new user
-router.post("/create", multer.single("user-img-upload"), async (req, res) => {
+router.post("/create", multer.single("crtUserImgUpload"), async (req, res) => {
+  const user = {
+    email: req.body.crtUserEmail,
+    firstname: req.body.crtUserFirstname,
+    lastname: req.body.crtUserLastname,
+    usertype: req.body.crtUserType,
+  };
   //Check HTML Form Data for valid input
-  const { error } = validateNewUser(req.body);
+  const { error } = validateNewUser(user);
   if (error) {
     res.status(400).render("createUser", {
       title: "Create new User",
       error: error.details[0].message,
-      email,
-      firstname,
-      lastname,
+      user,
     });
     return;
   }
@@ -60,17 +64,14 @@ router.post("/create", multer.single("user-img-upload"), async (req, res) => {
     res.status(400).render("createUser", {
       title: "Create new User",
       error: `User ${existingUser[0].email} already exists`,
-      email,
-      firstname,
-      lastname,
+      user,
     });
     return;
   }
-  //Destructuring data
-  const { email, firstname, lastname, usertype } = req.body;
-  const photo = req.file;
+  //Add user photo to user
+  user.photo = req.file;
   try {
-    await userDAO.create({ email, photo, firstname, lastname, usertype });
+    await userDAO.create(user);
     //Redirect to users
     res.redirect("/users");
   } catch (err) {

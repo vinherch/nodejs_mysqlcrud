@@ -75,7 +75,8 @@ module.exports = {
       try {
         //Check MIME Type of uploaded data
         if (!imageCheck(user.photo.mimetype)) return;
-        const photo = `/res/img/${user.photo.filename}`;
+
+        const photo = process.env.PATH_USER_IMG + user.photo.filename;
         const query = new Promise((res, rej) => {
           connection.query(
             `INSERT INTO USER (email, photo,firstname,lastname,user_type) VALUES (?,?,?,?,?)`,

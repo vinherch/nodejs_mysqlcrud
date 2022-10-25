@@ -5,27 +5,27 @@
     <%}%>
   </div>
   <form action="/users/create" method="post" enctype="multipart/form-data" class="crt-user-form">
-    <div class="crt-user-img">
-      <label for="crt-user-img-upload"><i class="fa-solid fa-user-tie crt-user-avatar"></i></label>
-      <input type="file" name="crt-user-img-upload" id="crt-user-img-upload" accept="image/png, image/jpeg, image/jpg" />
+    <div class="crt-user-img-container">
+      <label for="crt-user-img-upload" id="crt-user-img"><i class="fa-solid fa-user-tie crt-user-avatar"></i></label>
+      <input type="file" name="crtUserImgUpload" id="crt-user-img-upload" accept="image/png, image/jpeg, image/jpg" />
     </div>
     <div id="crt-user-img-msg"></div>
     <div class="crt-user-data">
       <div class="crt-user-email-group">
         <label for="crt-user-email">E-Mail:</label>
-        <input type="email" name="crt-user-email" id="crt-user-email" placeholder="Enter your email" required />
+        <input type="email" name="crtUserEmail" id="crt-user-email" placeholder="Enter your email" required />
       </div>
       <div class="crt-user-firstname-group">
         <label for="crt-user-firstname">Firstname:</label>
-        <input type="text" name="crt-user-firstname" id="crt-user-firstname" placeholder="Firstname" required />
+        <input type="text" name="crtUserFirstname" id="crt-user-firstname" placeholder="Firstname" required />
       </div>
       <div class="crt-user-lastname-group">
         <label for="crt-user-lastname">Lastname:</label>
-        <input type="text" name="crt-user-lastname" id="crt-user-lastname" placeholder="Lastname" required />
+        <input type="text" name="crtUserLastname" id="crt-user-lastname" placeholder="Lastname" required />
       </div>
       <div class="crt-user-type-group">
         <label for="crt-user-type">Role:</label>
-        <select name="crt-user-type" id="crt-user-type">
+        <select name="crtUserType" id="crt-user-type">
           <option value="admin">Admin</option>
           <option selected value="user">User</option>
         </select>
