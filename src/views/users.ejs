@@ -1,57 +1,64 @@
-<table class="tbl-user">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Photo</th>
-      <th>Email</th>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>Type</th>
-      <th>Created</th>
-      <th>Updated</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%if (Array.isArray(result)) { for (rec of result) { %> <% %>
-    <tr class="users-record">
-      <th class="users-th-id"><%= rec.id%></th>
-      <td class="users-td-photo">
-        <% if(rec.photo){ const src = rec.photo; %> <img src="<%=src%>" alt="" /> <% } else { %>
-        <i class="fa-solid fa-user-tie avatar-list"></i> <%} %>
-      </td>
-      <td class="users-td-email"><%= rec.email%></td>
-      <td class="users-td-firstname"><%= rec.firstname%></td>
-      <td class="users-td-lastname"><%= rec.lastname%></td>
-      <td class="users-td-type"><%= rec.user_type%></td>
-      <td class="users-td-created"><%= rec.created%></td>
-      <td class="users-td-updated"><%= rec.updated%></td>
-      <td>
-        <a href="/users/create" class="users-btn-create">Create</a>
-      </td>
-      <td>
-        <button class="users-btn-update">Update</button>
-      </td>
-      <td>
-        <button class="users-btn-delete">Delete</button>
-      </td>
-    </tr>
-    <% }} else { %>
-    <p><%-result%></p>
-    <%}%>
-  </tbody>
-</table>
+<div class="user-container">
+  <table class="tbl-user">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Photo</th>
+        <th>Email</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Type</th>
+        <th>Created</th>
+        <th>Updated</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <% if (result.length !== 0) { %>
+    <tbody>
+      <% for (record of result) { %>
+      <tr class="users-record">
+        <th class="users-th-id"><%= record.id%></th>
+        <td class="users-td-photo">
+          <% if(record.photo){ const src = record.photo; %><a href="/users/details/<%=record.id%>">
+            <img src="<%=src%>" alt="" />
+          </a>
+          <% } else { %> <a href="/users/details/<%=record.id%>"><i class="fa-solid fa-user-tie avatar-list"></i> </a> <%} %>
+        </td>
+        <td class="users-td-email" contenteditable="true"><%= record.email%></td>
+        <td class="users-td-firstname" contenteditable="true"><%= record.firstname%></td>
+        <td class="users-td-lastname" contenteditable="true"><%= record.lastname%></td>
+        <td class="users-td-type"><%= record.user_type%></td>
+        <td class="users-td-created"><%= record.formattedCreated%></td>
+        <td class="users-td-updated"><%= record.formattedUpdated%></td>
+        <td class="users-td-btn-create">
+          <a href="/users/create" class="users-btn-create">Create</a>
+        </td>
+        <td class="users-td-btn-update">
+          <button class="users-btn-update">Update</button>
+        </td>
+        <td class="users-td-btn-delete">
+          <button class="users-btn-delete">Delete</button>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+    <% } else { %>
+  </table>
+  <div>No entries yet!</div>
+  <%} %>
+</div>
 
 <!-- Mobile View -->
-<div class="mobile-view">
+<div class="mobile-view user-container">
   <% if (Array.isArray(result)) { for (rec of result) { %>
   <div class="mb-user-card">
     <div class="mb-user-card-control">
+      <div id="mb-user-card-id" class="hidden"><%= rec.id %></div>
       <div><a href="/users/details/<%=rec.id%>">Details</a></div>
-      <div><a href="/users/details/<%=rec.id%>">Update</a></div>
-      <div><a href="#">Delete</a></div>
+      <div><a href="/users/update/<%=rec.id%>">Update</a></div>
+      <div><button class="mb-user-card-btn-delete">Delete</button></div>
     </div>
     <div class="mb-user-card-container">
       <div class="mb-user-card-photo-container">

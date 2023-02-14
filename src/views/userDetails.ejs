@@ -1,23 +1,23 @@
 <div class="user-details-container">
   <div class="user-details-photo">
-    <% if (result[0].photo) { %>
-    <img src="<%= result[0].photo %>" alt="" />
+    <% if (result.photo) { %>
+    <img src="<%= result.photo %>" alt="" />
     <% } else { %>
     <i class="fa-solid fa-user-tie avatar-detail"></i>
     <%} %>
   </div>
   <div class="user-details-data">
     <div class="user-details-fullname">
-      <p class="user-details-firstname"><%= result[0].firstname %></p>
-      <p class="user-details-lastname"><%= result[0].lastname %></p>
+      <p class="user-details-firstname"><%= result.firstname %></p>
+      <p class="user-details-lastname"><%= result.lastname %></p>
     </div>
-    <div class="user-details-email"><p><%= result[0].email %></p></div>
+    <div class="user-details-email"><p><%= result.email %></p></div>
     <div class="user-details-type">
-      <p class="user-details-usertype">usertype: <%= result[0].user_type %></p>
+      <p class="user-details-usertype">usertype: <%= result.user_type %></p>
     </div>
     <div class="user-details-timestamp">
-      <p class="user-details-created">created: <span><%= result[0].created %></span></p>
-      <p class="user-details-updated">updated: <span><%= result[0].updated %></span></p>
+      <p class="user-details-created">created: <span><%= result.formattedCreated %></span></p>
+      <p class="user-details-updated">updated: <span><%= result.formattedUpdated %></span></p>
     </div>
   </div>
 </div>

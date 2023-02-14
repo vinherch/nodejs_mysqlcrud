@@ -10,6 +10,7 @@
       <input type="file" name="crtUserImgUpload" id="crt-user-img-upload" accept="image/png, image/jpeg, image/jpg" />
     </div>
     <div class="crt-user-data">
+      <div id="user-id"><%= result.id %></div>
       <div class="crt-user-email-group crt-user-form-data">
         <div><label for="crt-user-email">E-Mail:</label></div>
         <div>
@@ -19,13 +20,27 @@
       <div class="crt-user-firstname-group crt-user-form-data">
         <div><label for="crt-user-firstname">Firstname:</label></div>
         <div>
-          <input type="text" name="crtUserFirstname" id="crt-user-firstname" placeholder="Firstname" required />
+          <input
+            type="text"
+            value="<%= result.firstname ? result.firstname : '' %>"
+            name="crtUserFirstname"
+            id="crt-user-firstname"
+            placeholder="Firstname"
+            required
+          />
         </div>
       </div>
       <div class="crt-user-lastname-group crt-user-form-data">
         <div><label for="crt-user-lastname">Lastname:</label></div>
         <div>
-          <input type="text" name="crtUserLastname" id="crt-user-lastname" placeholder="Lastname" required />
+          <input
+            type="text"
+            value="<%= result.lastname ? result.lastname : '' %>"
+            name="crtUserLastname"
+            id="crt-user-lastname"
+            placeholder="Lastname"
+            required
+          />
         </div>
       </div>
       <div class="crt-user-type-group crt-user-form-data">
@@ -40,7 +55,7 @@
         </div>
       </div>
     </div>
-    <div class="crt-user-submit">
+    <div class="update-user-submit">
       <button>Submit</button>
     </div>
   </form>
