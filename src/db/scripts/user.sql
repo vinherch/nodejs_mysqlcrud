@@ -1,6 +1,6 @@
 #CREATE TABLE USER
 
-use crud_db;
+use crud_nodejs;
 
 CREATE TABLE IF NOT EXISTS USER (
 

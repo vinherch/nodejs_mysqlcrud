@@ -6,7 +6,7 @@ const getConnection = () => {
     user: "root",
     password: "root",
     dateStrings: "date",
-    database: "crud_db",
+    database: "crud_nodejs",
   });
   if (connection) return connection;
   return null;
