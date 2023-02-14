@@ -70,12 +70,11 @@ body {
 /*** Desktop View - Header Styles ***/
 /***********************************************************/
 header {
-  min-height: 20vh;
+  height: 20vh;
   width: 100vw;
   background-image: var(--header-bg);
   background-size: 100%;
   background-position: center;
-  box-shadow: inset 20vh red;
   position: sticky;
   top: 0;
   color: var(--header-fn-clr);
@@ -152,7 +151,8 @@ header {
   overflow: hidden;
 }
 
-.user-container {
+.user-container,
+.crt-user-form-container {
   max-height: var(--container-max-height);
   overflow-y: scroll;
 }
@@ -326,7 +326,7 @@ th {
 
 .crt-user-submit,
 .update-user-submit {
-  margin-top: 3rem;
+  margin-top: 5rem;
   display: flex;
   justify-content: center;
 }
@@ -403,9 +403,30 @@ th {
 }
 
 .error-msg {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.8rem;
+  font-size: 0.8rem;
+  width: 50%;
+  color: red;
+}
+
+.error-msg-container {
   text-align: center;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
+  position: relative;
+  padding: 0.5rem 0.5rem;
+  box-shadow: 2px 2px 5px rgb(223, 223, 223);
+  align-items: center;
+}
+
+.error-msg-container button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  margin-left: auto;
+  height: 100%;
+  border: none;
 }
 
 .error-input {
@@ -520,7 +541,7 @@ input[type="file"] {
 /***********************************************************/
 @media screen and (max-width: 1024px) {
   header {
-    height: 20vh;
+    height: 15vh;
     width: 100vw;
     color: var(--header-fn-clr);
     display: flex;
@@ -535,9 +556,11 @@ input[type="file"] {
     padding: 1rem;
     width: 100%;
     overflow-x: hidden;
+    height: 70vh;
   }
 
-  .user-container {
+  .user-container,
+  .crt-user-form-container {
     padding: 0.5rem;
   }
 
@@ -684,8 +707,13 @@ input[type="file"] {
   /***********************************************************/
   /*** Mobile M - Form Create New User ***/
   /***********************************************************/
-  .crt-user-avatar {
-    font-size: 7rem;
+  .crt-user-form-container,
+  .crt-user-form {
+    height: 100%;
+  }
+
+  .crt-user-submit {
+    margin-top: 7rem;
   }
 
   .crt-user-img-container {
@@ -708,7 +736,7 @@ input[type="file"] {
   }
 
   .error-msg {
-    margin-bottom: 1rem;
+    width: 100%;
   }
 
   /***********************************************************/
@@ -795,5 +823,12 @@ input[type="file"] {
   .new-user a:hover {
     color: #000;
     background-color: var(--header-fn-clr);
+  }
+
+  /***********************************************************/
+  /*** Mobile S - Form Create New User ***/
+  /***********************************************************/
+  .crt-user-avatar {
+    font-size: 6rem;
   }
 }

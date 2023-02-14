@@ -12,6 +12,7 @@ const crtUserEmail = document.querySelector("#crt-user-email");
 const crtUserFirstname = document.querySelector("#crt-user-firstname");
 const crtUserLastname = document.querySelector("#crt-user-lastname");
 const userID = document.querySelector("#user-id");
+const errorMessageContainerBtn = document.querySelector(".error-msg-container button");
 
 /* Create new user - User Form */
 if (crtUserFormSubmit)
@@ -78,6 +79,8 @@ usersBtnUpdate.forEach((btn) =>
     const firstname = record.querySelector(".users-td-firstname").textContent;
     const lastname = record.querySelector(".users-td-lastname").textContent;
     const updated = record.querySelector(".users-td-updated");
+    if (email === "" || firstname === "" || lastname === "") return;
+    if (!checkEmail(email)) return;
     await updateUser({ id, email, firstname, lastname })
       .then((response) => {
         if (response.ok) {
@@ -196,19 +199,7 @@ function userImgFileHandler(event) {
 
 /* File handling for user image select */
 function checkFileType(type) {
-  const fileTypes = [
-    "image/apng",
-    "image/bmp",
-    "image/jpg",
-    "image/gif",
-    "image/jpeg",
-    "image/pjpeg",
-    "image/png",
-    "image/svg+xml",
-    "image/tiff",
-    "image/webp",
-    "image/x-icon",
-  ];
+  const fileTypes = ["image/apng", "image/bmp", "image/jpg", "image/gif", "image/jpeg", "image/pjpeg", "image/png", "image/svg+xml", "image/tiff", "image/webp", "image/x-icon"];
   return fileTypes.includes(type);
 }
 
@@ -219,3 +210,9 @@ mobileUserCards.forEach((element) => {
     element.children[1].classList.toggle("blurred");
   });
 });
+
+/* Handling Error Message - Close message */
+if (errorMessageContainerBtn)
+  errorMessageContainerBtn.addEventListener("click", (e) => {
+    e.target.parentElement.remove();
+  });

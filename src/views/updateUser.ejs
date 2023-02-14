@@ -1,7 +1,10 @@
 <div class="crt-user-form-container">
   <div class="error-msg">
     <% if (error) { %>
-    <p><%= error %></p>
+    <div class="error-msg-container">
+      <p><%= error %></p>
+      <button>x</button>
+    </div>
     <%}%>
   </div>
   <form enctype="multipart/form-data" class="crt-user-form">
@@ -20,27 +23,13 @@
       <div class="crt-user-firstname-group crt-user-form-data">
         <div><label for="crt-user-firstname">Firstname:</label></div>
         <div>
-          <input
-            type="text"
-            value="<%= result.firstname ? result.firstname : '' %>"
-            name="crtUserFirstname"
-            id="crt-user-firstname"
-            placeholder="Firstname"
-            required
-          />
+          <input type="text" value="<%= result.firstname ? result.firstname : '' %>" name="crtUserFirstname" id="crt-user-firstname" placeholder="Firstname" required />
         </div>
       </div>
       <div class="crt-user-lastname-group crt-user-form-data">
         <div><label for="crt-user-lastname">Lastname:</label></div>
         <div>
-          <input
-            type="text"
-            value="<%= result.lastname ? result.lastname : '' %>"
-            name="crtUserLastname"
-            id="crt-user-lastname"
-            placeholder="Lastname"
-            required
-          />
+          <input type="text" value="<%= result.lastname ? result.lastname : '' %>" name="crtUserLastname" id="crt-user-lastname" placeholder="Lastname" required />
         </div>
       </div>
       <div class="crt-user-type-group crt-user-form-data">
