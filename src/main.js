@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const app = require("express")();
-const ejs = require("ejs");
 const expressLayouts = require("express-ejs-layouts");
 const morgan = require("morgan");
 const path = require("path");
@@ -10,7 +9,7 @@ const usersAPI = require("./api/v1.0/routes/users");
 const users = require("./routes/users");
 
 //Config
-dotenv.config({ path: `${__dirname}/config/.env` });
+dotenv.config({ path: path.join(__dirname, "/config/.env") });
 
 //Express
 const port = process.env.PORT || 8889;
@@ -36,8 +35,11 @@ app.use("/js", express.static("./src/public/js"));
 app.use("/profile_img", express.static("./profile_img/"));
 
 //Logging
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 
 //Routes
+//REST API
 app.use("/api/v1.0/users/", usersAPI);
+
+app.get("/", (req, res) => res.redirect("/users"));
 app.use("/users", users);

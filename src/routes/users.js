@@ -1,16 +1,24 @@
-const dotenv = require("dotenv").config({ path: `${__dirname}/config/.env` });
 const router = require("express").Router();
 const multer = require("multer")({ dest: "./profile_img" });
 
 const userDAO = require("../dao/userDAO");
+const dateHelper = require("../helper/dateHelper");
 const { validateNewUser } = require("../validation/validation");
 
 //GET
-//Get all users
+/* Get all users */
 router.get("/", async (req, res) => {
   try {
-    const result = await userDAO.getAll();
+    let result = await userDAO.getAll();
+    result = result.map((e) => {
+      return {
+        ...e,
+        formattedCreated: dateHelper.getFormattedDate(new Date(e.created)),
+        formattedUpdated: dateHelper.getFormattedDate(new Date(e.updated)),
+      };
+    });
     res.render("users", {
+      title: "Welcome - Dashboard",
       result,
     });
   } catch (err) {
@@ -19,28 +27,87 @@ router.get("/", async (req, res) => {
 });
 
 //GET
-//Get user by ID
+/* User user details */
 router.get("/details/:id", async (req, res) => {
   try {
-    const result = await userDAO.get(req.params.id);
+    let result = await userDAO.get(req.params.id);
+    result = {
+      ...result[0],
+      formattedCreated: dateHelper.getFormattedDate(new Date(result[0].created)),
+      formattedUpdated: dateHelper.getFormattedDate(new Date(result[0].updated)),
+    };
     if (result.length === 0) {
       res.status(404).render("users", { result: "User ID not found!" });
       return;
     }
-    res.render("userDetails", { result });
+    res.render("userDetails", { title: `Details ${result.firstname} ${result.lastname}`, result });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //GET
-//User form
+/* User form - Update user (mobile view) */
+router.get("/update/:id", async (req, res) => {
+  try {
+    let result = await userDAO.get(req.params.id);
+    result = {
+      ...result[0],
+      formattedCreated: dateHelper.getFormattedDate(new Date(result[0].created)),
+      formattedUpdated: dateHelper.getFormattedDate(new Date(result[0].updated)),
+    };
+    if (result.length === 0) {
+      res.status(404).render("users", { result: "User ID not found!" });
+      return;
+    }
+    res.render("updateUser", {
+      title: `Update ${result.firstname} ${result.lastname}`,
+      error: null,
+      result,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//POST
+/* Update user (mobile view) */
+router.post("/update/:id", multer.single("crtUserImgUpload"), async (req, res) => {
+  const user = {
+    email: req.body.crtUserEmail,
+    firstname: req.body.crtUserFirstname,
+    lastname: req.body.crtUserLastname,
+    usertype: req.body.crtUserType,
+  };
+  //Check HTML form data for valid input
+  const { error } = validateNewUser(user);
+  if (error) {
+    res.status(400).render("updateUser", {
+      title: "Update failed",
+      error: error.details[0].message,
+      result: { id: req.params.id, ...user },
+    });
+    return;
+  }
+  //Add user photo to user
+  user.photo = req.file;
+  try {
+    await userDAO.update(+req.params.id, user.photo, user.email, user.firstname, user.lastname, user.usertype);
+    //Redirect to users
+    res.redirect("/users");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET
+/* Create new user - Form */
 router.get("/create/", async (req, res) => {
   res.render("createUser", { title: `Create new user`, error: null });
 });
 
 //POST
-//Create new user
+/* Create new user */
 router.post("/create", multer.single("crtUserImgUpload"), async (req, res) => {
   const user = {
     email: req.body.crtUserEmail,
@@ -80,7 +147,7 @@ router.post("/create", multer.single("crtUserImgUpload"), async (req, res) => {
 });
 
 //PUT
-//Update user
+/* Update user (Desktop View) */
 router.put("/:id", async (req, res) => {
   //Check HTML Form Data for valid input
   const { error } = validateNewUser(req.body);
@@ -89,7 +156,13 @@ router.put("/:id", async (req, res) => {
     return;
   }
   try {
-    const result = await userDAO.updateAndGet(req.body.id, req.body.firstname, req.body.lastname);
+    let result = await userDAO.updateAndGet(req.body.id, req.body.email, req.body.firstname, req.body.lastname);
+    // Add formatted date fields
+    result = {
+      ...result[0],
+      formattedCreated: dateHelper.getFormattedDate(new Date(result[0].created)),
+      formattedUpdated: dateHelper.getFormattedDate(new Date(result[0].updated)),
+    };
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json(err);
@@ -97,7 +170,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //DELETE
-//Delete user by ID
+/* Delete user */
 router.delete("/:id", async (req, res) => {
   try {
     let result = await userDAO.delete(req.params.id);
@@ -110,8 +183,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-//TODO:
-//Timestamp Format
 
 module.exports = router;

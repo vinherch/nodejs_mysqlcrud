@@ -1,9 +1,4 @@
-const fs = require("fs");
-const mysql = require("mysql");
-const path = require("path");
-
 const { getConnection } = require("../helper/dbConnectionHelper");
-const { readFile } = require("../helper/fileReader");
 const imageCheck = require("../helper/imageCheck");
 
 module.exports = {
@@ -75,7 +70,6 @@ module.exports = {
       try {
         //Check MIME Type of uploaded data
         if (!imageCheck(user.photo.mimetype)) return;
-
         const photo = process.env.PATH_USER_IMG + user.photo.filename;
         const query = new Promise((res, rej) => {
           connection.query(
@@ -87,7 +81,6 @@ module.exports = {
             }
           );
         });
-
         return query;
       } catch (err) {
         return Promise.reject(err);
@@ -97,33 +90,59 @@ module.exports = {
     }
   },
 
-  update: (id, firstname, lastname) => {
+  update: async (id, photo, email, firstname, lastname, usertype) => {
     const connection = getConnection();
     if (!connection) return false;
-    return new Promise((resolve, rej) => {
-      try {
-        connection.query(`UPDATE USER SET FIRSTNAME="${firstname}",LASTNAME="${lastname}" WHERE ID=${id}`, (error, results, fields) => {
-          if (!error) return resolve(results);
+    if (!photo) {
+      return new Promise((resolve, rej) => {
+        try {
+          connection.query(
+            `UPDATE USER SET EMAIL="${email}",FIRSTNAME="${firstname}",LASTNAME="${lastname}",USER_TYPE="${usertype}" WHERE ID=${id}`,
+            (error, results, fields) => {
+              if (!error) return resolve(results);
+              rej(error);
+            }
+          );
+        } catch (error) {
           rej(error);
+        }
+      });
+    } else {
+      try {
+        //Check MIME Type of uploaded data
+        if (!imageCheck(photo.mimetype)) return;
+        photo = process.env.PATH_USER_IMG + photo.filename;
+        const query = new Promise((res, rej) => {
+          connection.query(
+            `UPDATE USER SET PHOTO="${photo}",EMAIL="${email}",FIRSTNAME="${firstname}",LASTNAME="${lastname}",USER_TYPE="${usertype}" WHERE ID=${id}`,
+            (error, results, fields) => {
+              if (!error) res(results);
+              rej(error);
+            }
+          );
         });
-      } catch (error) {
-        rej(error);
+        return query;
+      } catch (err) {
+        return Promise.reject(err);
       } finally {
         connection.end();
       }
-    });
+    }
   },
 
-  updateAndGet: function (id, firstname, lastname) {
+  updateAndGet: function (id, email, firstname, lastname) {
     const connection = getConnection();
     if (!connection) return false;
     return new Promise((resolve, rej) => {
       try {
         //Update record
-        connection.query(`UPDATE USER SET FIRSTNAME="${firstname}",LASTNAME="${lastname}" WHERE ID=${id}`, (error, results, fields) => {
-          if (!error) resolve(results);
-          rej(error);
-        });
+        connection.query(
+          `UPDATE USER SET EMAIL="${email}",FIRSTNAME="${firstname}",LASTNAME="${lastname}" WHERE ID=${id}`,
+          (error, results, fields) => {
+            if (!error) resolve(results);
+            rej(error);
+          }
+        );
       } catch (error) {
         rej(error);
       }
