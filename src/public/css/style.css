@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap");
 
-/* General Styles */
+/***********************************************************/
+/*** Desktop View - General Styles ***/
+/***********************************************************/
 *,
 *::before,
 *::after {
@@ -12,16 +14,14 @@
 :root {
   --fnt-fam-main: "Roboto Condensed", sans-serif;
   --header-sitedesc-fn-shadow: 2px 2px 5px rgb(77, 77, 77);
-  --header-bg-clr: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
+  --header-bg: linear-gradient(to bottom, rgba(83, 83, 83, 0.6), rgb(161, 161, 161, 0.4)), url("../res/bg_header.jpg");
   --header-logo-fs: 1.5rem;
-  --header-logo-fs-mobile: 1.2rem;
+  --header-logo-fs-mobile: 1rem;
   --header-fn-clr: #fff;
   --container-l-width: 90%;
   --container-md-width: 100%;
   --container-max-height: 70vh;
   --container-min-height: 10rem;
-  --footer-bg-clr: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
-  --footer-fn-clr: #fff;
   --cl-success: rgb(170, 255, 170);
   --cl-error: rgb(255, 170, 170);
   --clr-avatar: rgb(126, 126, 126);
@@ -34,15 +34,48 @@ html {
 body {
   overflow: hidden;
   max-width: 100vw;
-  overflow-y: scroll;
+  overflow: hidden;
   min-height: 30rem;
+  max-height: 100vh;
 }
 
-/* Header */
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 2px;
+}
+
+/***********************************************************/
+/*** Animations ***/
+/***********************************************************/
+@keyframes success {
+  0% {
+  }
+  50% {
+    background: var(--cl-success);
+  }
+  100% {
+  }
+}
+@keyframes error {
+  0% {
+  }
+  50% {
+    background: var(--cl-error);
+  }
+  100% {
+  }
+}
+
+/***********************************************************/
+/*** Desktop View - Header Styles ***/
+/***********************************************************/
 header {
   min-height: 20vh;
   width: 100vw;
-  background-image: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
+  background-image: var(--header-bg);
+  background-size: 100%;
+  background-position: center;
+  box-shadow: inset 20vh red;
   position: sticky;
   top: 0;
   color: var(--header-fn-clr);
@@ -54,6 +87,17 @@ header {
 .header-logo {
   flex: 1;
   font-size: var(--header-logo-fs);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.header-logo span {
+  font-size: 2rem;
+}
+
+.header-logo a {
+  text-decoration: none;
+  color: var(--header-fn-clr);
 }
 
 .site-desc {
@@ -77,6 +121,7 @@ header {
   color: var(--header-fn-clr);
   padding: 1rem;
   border: 1px solid var(--header-fn-clr);
+  transition: all 350ms ease;
 }
 
 .new-user a:hover {
@@ -85,35 +130,60 @@ header {
 }
 
 /***********************************************************/
+/*** Desktop View - Footer Styles ***/
+/***********************************************************/
+.footer {
+  width: 100%;
+  font-size: x-small;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  padding: 0.5rem;
+  color: #000;
+}
 
-/* User Ovierview */
+/***********************************************************/
+/*** Desktop User Ovierview / Dashboard ***/
+/***********************************************************/
 .container {
-  max-width: var(--container-l-width);
-  max-height: var(--container-max-height);
   margin: 0 auto;
   padding: 2rem;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.user-container {
+  max-height: var(--container-max-height);
   overflow-y: scroll;
 }
 
 .tbl-user {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
   border-spacing: 0;
+  width: 100%;
+  position: relative;
+}
+
+.tbl-user thead {
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.tbl-user tbody {
+  overflow-y: scroll;
 }
 
 .tbl-user tr:nth-child(even) {
-  background-color: #eee;
+  background-color: rgb(248, 248, 248);
 }
 
 .tbl-user tbody tr:hover {
-  background-color: #ccc;
+  background-color: rgba(226, 226, 226, 0.774);
 }
 
 .tbl-user thead {
   background-color: #ddd;
+  z-index: 1;
 }
 
 .tbl-user thead th {
@@ -124,76 +194,55 @@ header {
 th {
   border: 1px solid #ddd;
   text-align: center;
+  height: 3rem;
+  padding: 0rem 0.5rem;
 }
 
 .users-btn-create,
 .users-btn-update,
 .users-btn-delete {
+  position: relative;
   text-decoration: none;
   color: #000;
   border: none;
   background: none;
   cursor: pointer;
+  transition: all 500ms ease;
   font-family: var(--fnt-fam-main) !important;
   font-size: 1rem;
 }
 
-.mobile-view {
-  display: none;
-}
-
-/***********************************************************/
-
-/* Footer */
-footer {
-  width: 100vw;
-  font-size: x-small;
-  position: fixed;
-  bottom: 0;
-  text-align: center;
-  padding: 1rem;
-  background-image: var(--footer-bg-clr);
-  color: var(--footer-fn-clr);
-}
-
-/***********************************************************/
-
-.form-container {
-  width: 100%;
-}
-
-.user-create-form {
-  width: 50%;
-  max-width: 30rem;
+.users-td-btn-create,
+.users-td-btn-update,
+.users-td-btn-delete {
   position: relative;
 }
 
-.users-record {
-  transition: all 5s ease;
+.users-td-btn-create::before,
+.users-td-btn-update::before,
+.users-td-btn-delete::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  transition: width 350ms ease;
+  background-color: rgb(147, 248, 147);
 }
 
-.users-record-success {
-  animation: success 2000ms ease-in-out alternate-reverse;
+.users-td-btn-update::before {
+  background-color: rgb(255, 255, 137);
 }
 
-.users-record-error {
-  animation: error 2000ms ease-in-out alternate-reverse;
+.users-td-btn-delete::before {
+  background-color: rgb(249, 148, 148);
 }
 
-/*Users overview*/
-.record {
-  height: 3rem;
-  padding: 0.2rem;
-  max-height: 3rem;
-}
-
-.users-td-photo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  height: 3rem;
-  max-height: 3rem;
+.users-td-btn-create:hover::before,
+.users-td-btn-update:hover::before,
+.users-td-btn-delete:hover::before {
+  width: 100%;
 }
 
 .users-td-photo img,
@@ -205,91 +254,109 @@ footer {
 
 .avatar-list {
   margin-top: auto;
+  height: min-content;
   color: var(--clr-avatar);
 }
 
-/***********************************************************/
+.users-record {
+  transition: all 500ms ease;
+}
 
-/* User Create Form */
+.users-record-success {
+  animation: success 2000ms ease-in-out alternate-reverse;
+}
+
+.users-record-error {
+  animation: error 2000ms ease-in-out alternate-reverse;
+}
+
+.mobile-view {
+  display: none;
+}
+
+/***********************************************************/
+/*** Form - Create new user / update user ***/
+/***********************************************************/
 .crt-user-form-container {
-  margin: auto;
-  max-width: 70rem;
-  height: 50vh;
+  padding: 1rem;
 }
 
 .crt-user-img-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 15rem;
-  width: 50%;
-  margin: auto;
   position: relative;
-}
-
-.crt-user-avatar {
-  font-size: 10rem;
-  color: var(--clr-avatar);
-}
-
-#crt-user-img img {
-  max-width: 15rem;
-  object-fit: cover;
-}
-
-.crt-user-form {
-  height: 100%;
 }
 
 .crt-user-data {
   margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.crt-user-email-group,
-.crt-user-firstname-group,
-.crt-user-lastname-group,
-.crt-user-type-group {
-  margin: auto;
-  width: 70%;
+.crt-user-form-data {
   display: flex;
+  margin: 1rem 0rem;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem;
 }
 
-.crt-user-email-group input,
-.crt-user-firstname-group input,
-.crt-user-lastname-group input,
-.crt-user-type-group select {
+.crt-user-form-data input,
+.crt-user-form-data select {
   padding: 0.5rem;
   width: 80%;
   font-size: 1rem;
 }
 
-.crt-user-submit {
-  width: 70%;
-  margin: auto;
+.crt-user-form-data input:active,
+.crt-user-form-data input:focus,
+.crt-user-form-data select:active,
+.crt-user-form-data select:focus {
+  border: 2px solid rgba(115, 140, 152, 0.769);
+  background-color: rgba(163, 177, 184, 0.333);
+  outline: 0;
+}
+
+.crt-user-form-data div {
+  flex: 1;
+}
+
+.crt-user-form-data div:nth-child(2) {
+  flex: 3;
+}
+
+.crt-user-submit,
+.update-user-submit {
+  margin-top: 3rem;
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
 }
 
-.crt-user-submit button {
+.crt-user-submit button,
+.update-user-submit button {
   text-decoration: none;
+  transition: all 350ms ease;
   background-color: #fff;
   border: 1px solid #999;
-  padding: 1rem 3rem;
-  width: 100%;
+  border-radius: 3px;
+  padding: 0.7rem 7rem;
   box-shadow: 2px 2px 5px #999;
+  color: #000;
 }
 
-.crt-user-submit button:hover {
-  color: #fff;
-  background-color: #999;
+.crt-user-submit button:hover,
+.update-user-submit button:hover {
+  background-color: rgb(228, 228, 228);
+}
+
+.crt-user-avatar {
+  font-size: 10rem;
+  color: var(--clr-avatar);
+  cursor: pointer;
+}
+
+#crt-user-img img {
+  max-width: 15rem;
+  object-fit: cover;
 }
 
 .crt-user-img::before {
@@ -331,92 +398,373 @@ footer {
   background-position: center;
 }
 
-.user-img img {
-  width: 180px;
-  height: 180px;
+#user-id {
+  display: none;
 }
 
-.user-img-upload {
-  cursor: pointer;
+.error-msg {
+  text-align: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
 }
 
-.avatar {
-  color: rgb(123, 123, 123);
-  font-size: 7rem;
+.error-input {
+  background-color: rgb(255 180 180);
+  outline: 0;
+  border: 2px solid rgb(232, 32, 32);
 }
 
 input[type="file"] {
   display: none;
 }
 
-.btn-user-submit {
+/***********************************************************/
+/*** User Detail View ***/
+/***********************************************************/
+.user-details-container {
+  display: flex;
+  flex-direction: column;
+  color: #777;
+}
+
+.user-details-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 25rem;
+}
+
+.user-details-photo img {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+}
+
+.avatar-detail {
+  font-size: 10rem;
+  margin: auto;
+}
+
+.user-details-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-details-fullname {
+  display: flex;
+  gap: 0.3rem;
+  font-size: 3rem;
+  padding: 1rem 0;
+  color: rgb(61, 61, 61);
+  font-weight: bolder;
+  justify-content: center;
+}
+
+.user-details-type,
+.user-details-timestamp,
+.user-details-email {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.user-details-type {
+  font-size: 1.2rem;
+}
+
+.user-details-timestamp {
+  font-size: 1rem;
+}
+
+.user-details-timestamp {
+  flex-direction: column;
+  flex: 1;
+
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+}
+.user-details-timestamp > * {
   width: 100%;
-  max-width: 30rem;
+}
+
+.user-details-created,
+.user-details-updated {
+  gap: 0.3rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 /***********************************************************/
-
-/* Animations */
-@keyframes success {
-  0% {
-  }
-  50% {
-    background: var(--cl-success);
-  }
-  100% {
-  }
-}
-@keyframes error {
-  0% {
-  }
-  50% {
-    background: var(--cl-error);
-  }
-  100% {
-  }
-}
-
+/*** Media Queries ***/
 /***********************************************************/
-
-/* Media Queries */
-
-/* Container - User Ovierview */
 @media screen and (max-width: 1280px) {
   .container {
     max-width: var(--container-md-width);
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1280px) {
   .tbl-user,
-  .btn-create,
-  .btn-update,
-  .btn-delete {
-    /*font size calc - TODO*/
+  .users-btn-create,
+  .users-btn-update,
+  .users-btn-delete {
     font-size: small;
   }
 }
 
 /***********************************************************/
-
-/* Mobile */
-@media screen and (max-width: 768px) {
+/*** Mobile Medium - General Styles ***/
+/***********************************************************/
+@media screen and (max-width: 1024px) {
   header {
     height: 20vh;
     width: 100vw;
-    background-image: linear-gradient(90deg, rgb(83, 83, 83), rgb(161, 161, 161));
-    position: sticky;
-    top: 0;
     color: var(--header-fn-clr);
     display: flex;
     align-items: center;
     padding: 1rem;
   }
 
-  /* Header */
+  /***********************************************************/
+  /*** Mobile M - User Ovierview / Dashboard ***/
+  /***********************************************************/
+  .container {
+    padding: 1rem;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .user-container {
+    padding: 0.5rem;
+  }
+
+  .tbl-user {
+    display: none;
+  }
+
+  .mobile-view {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mb-user-card {
+    overflow: hidden;
+    box-shadow: 3px 3px 5px rgb(111, 111, 111, 0.3);
+    display: flex;
+    flex-direction: column;
+    padding: 0.7rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 350ms ease;
+  }
+
+  .mb-user-card:active,
+  .mb-user-card:focus,
+  .mb-user-card:hover {
+    box-shadow: 3px 3px 5px rgb(111, 111, 111, 0.3), 5px 5px 15px rgb(111, 111, 111, 0.4);
+  }
+
+  .blurred {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    opacity: 0.3;
+  }
+
+  .mb-user-card-control {
+    z-index: 2;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(101, 101, 101, 0.7);
+    transition: width 500ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .mb-user-card-control a,
+  button {
+    text-decoration: none;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+    height: 3rem;
+    border: 1px solid white;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 300ms ease;
+  }
+
+  .mb-user-card-control button {
+    background-color: transparent;
+  }
+
+  .hidden {
+    visibility: hidden;
+    pointer-events: none;
+    display: none;
+  }
+
+  .mb-user-card-control a:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .mb-user-card-control-expand {
+    width: 100%;
+  }
+
+  .mb-user-card-photo-container {
+    padding: 0.3rem;
+    min-height: 8rem;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .mb-user-card-photo {
+    border-radius: 100%;
+    overflow: hidden;
+    box-shadow: 1px 1px 5px rgb(111, 111, 111, 0.3);
+    max-width: 100%;
+    max-height: 100%;
+    width: 8rem;
+    height: 8rem;
+    position: relative;
+  }
+
+  .mb-user-card-photo img {
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .avatar-list {
+    color: var(--clr-avatar);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-65%, -60%);
+    font-size: 3rem;
+  }
+
+  .mb-user-card-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+    margin-top: 1rem;
+    min-height: 5rem;
+    pointer-events: none;
+  }
+
+  .mb-user-fullname {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .mb-user-email {
+    font-size: smaller;
+  }
+
+  /***********************************************************/
+  /*** Mobile M - Form Create New User ***/
+  /***********************************************************/
+  .crt-user-avatar {
+    font-size: 7rem;
+  }
+
+  .crt-user-img-container {
+    max-height: 12rem;
+    overflow: scroll;
+  }
+
+  .crt-user-form-data div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .crt-user-data {
+    margin-top: 1.5rem;
+  }
+
+  .crt-user-submit button,
+  .update-user-submit button {
+    width: 100%;
+  }
+
+  .error-msg {
+    margin-bottom: 1rem;
+  }
+
+  /***********************************************************/
+  /*** Mobile M - User Detail View ***/
+  /***********************************************************/
+  .user-details-photo {
+    min-height: 20rem;
+  }
+
+  .user-details-photo img {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+  }
+
+  .avatar-detail {
+    font-size: 10rem;
+    margin: auto;
+  }
+
+  .user-details-fullname {
+    font-size: 2rem;
+    padding: 0;
+  }
+
+  .user-details-email {
+    font-size: 1.2rem;
+  }
+
+  .user-details-type {
+    font-size: 1rem;
+  }
+
+  .user-details-timestamp {
+    font-size: 0.8rem;
+  }
+}
+
+/***********************************************************/
+/*** Mobile S - User Ovierview / Dashboard ***/
+/***********************************************************/
+@media screen and (max-width: 768px) {
+  .mobile-view {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  /***********************************************************/
+  /*** Mobile S - Header Styles ***/
+  /***********************************************************/
   .header-logo {
     flex: 1;
     font-size: var(--header-logo-fs-mobile);
+  }
+
+  .header-logo span {
+    font-size: 1.5rem;
   }
 
   .site-desc {
@@ -448,226 +796,4 @@ input[type="file"] {
     color: #000;
     background-color: var(--header-fn-clr);
   }
-
-  /***********************************************************/
-
-  /* User Ovierview */
-  .container {
-    padding: 1rem;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  .tbl-user {
-    display: none;
-  }
-
-  .mobile-view {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    width: 100%;
-    height: 100%;
-  }
-
-  .mb-user-card {
-    overflow: hidden;
-    min-height: 10rem;
-    box-shadow: 3px 3px 5px rgb(111, 111, 111, 0.3);
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .blurred {
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    opacity: 0.3;
-  }
-
-  .mb-user-card-control {
-    z-index: 2;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: rgba(41, 41, 41, 0.7);
-    transition: width 500ms ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .mb-user-card-control a {
-    text-decoration: none;
-    display: inline-block;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 7rem;
-    height: 3rem;
-    border: 1px solid white;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 300ms ease;
-  }
-
-  .mb-user-card-control a:hover {
-    background-color: #fff;
-    color: #000;
-  }
-
-  .mb-user-card-control-expand {
-    width: 100%;
-  }
-
-  .mb-user-card-photo-container {
-    padding: 0.3rem;
-    flex: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-  }
-
-  .mb-user-card-photo {
-    border-radius: 100%;
-    overflow: hidden;
-    box-shadow: 1px 1px 5px rgb(111, 111, 111, 0.3);
-    max-width: 100%;
-    max-height: 100%;
-    width: 5rem;
-    height: 5rem;
-    position: relative;
-  }
-
-  .avatar-list {
-    color: var(--clr-avatar);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-65%, -60%);
-    font-size: 3rem;
-  }
-
-  .mb-user-card-photo img {
-    object-fit: cover;
-    width: 100%;
-  }
-
-  .mb-user-card-data {
-    margin-top: auto;
-    padding: 0.3rem;
-    margin-top: 1rem;
-    flex: 1;
-    pointer-events: none;
-  }
-
-  .mb-user-fullname {
-    display: flex;
-    gap: 0.2rem;
-  }
-
-  .mb-user-email {
-    font-size: smaller;
-  }
-
-  /* User Detail View */
-  .user-details-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 30rem;
-    color: #777;
-  }
-
-  .user-details-photo {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .user-details-photo img {
-    width: 12rem;
-    height: 12rem;
-    object-fit: cover;
-  }
-
-  .avatar-detail {
-    font-size: 10rem;
-
-    margin: auto;
-  }
-
-  .user-details-data {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .user-details-fullname {
-    display: flex;
-    gap: 0.3rem;
-    font-size: 1.5rem;
-    color: rgb(61, 61, 61);
-    font-weight: bolder;
-    justify-content: center;
-  }
-
-  .user-details-email {
-    align-self: center;
-  }
-
-  .user-details-type,
-  .user-details-timestamp {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-  }
-
-  .user-details-type {
-    margin-top: 0.5rem;
-  }
-
-  .user-details-timestamp {
-    flex-direction: column;
-    flex: 1;
-
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-  }
-  .user-details-timestamp > * {
-    width: 100%;
-  }
-
-  .user-details-created,
-  .user-details-updated {
-    gap: 0.3rem;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  /***********************************************************/
-
-  /* Footer */
-  footer {
-    width: 100vw;
-    font-size: x-small;
-    position: fixed;
-    bottom: 0;
-    text-align: center;
-    padding: 1rem;
-    background-image: var(--footer-bg-clr);
-    color: var(--footer-fn-clr);
-  }
-
-  /***********************************************************/
 }
