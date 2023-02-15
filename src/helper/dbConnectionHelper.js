@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 
-const getConnection = () => {
+const connection = () => {
   const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -12,4 +12,4 @@ const getConnection = () => {
   return null;
 };
 
-module.exports.getConnection = getConnection;
+module.exports.getConnection = connection;
