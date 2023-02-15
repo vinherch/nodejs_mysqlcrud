@@ -312,7 +312,15 @@ th {
 .crt-user-form-data input:active,
 .crt-user-form-data input:focus,
 .crt-user-form-data select:active,
-.crt-user-form-data select:focus {
+.crt-user-form-data select:focus,
+.crt-user-submit button:focus,
+.crt-user-submit button:active,
+.update-user-submit button:focus,
+.update-user-submit button:active,
+.crt-user-submit a:focus,
+.crt-user-submit a:active,
+.update-user-submit a:focus,
+.update-user-submit a:active {
   border: 2px solid rgba(115, 140, 152, 0.769);
   background-color: rgba(163, 177, 184, 0.333);
   outline: 0;

@@ -32,7 +32,7 @@ app.use(express.static("public"));
 app.use("/css", express.static("./src/public/css"));
 app.use("/res", express.static("./src/public/res"));
 app.use("/js", express.static("./src/public/js"));
-app.use("/profile_img", express.static("./profile_img/"));
+app.use("/user_images", express.static("./user_images/"));
 
 //Logging
 //app.use(morgan("dev"));

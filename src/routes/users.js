@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const multer = require("multer")({ dest: "./profile_img" });
+const multer = require("multer")({ dest: "user_images/" });
 
 const userDAO = require("../dao/userDAO");
 const dateHelper = require("../helper/dateHelper");
