@@ -151,7 +151,7 @@ header {
   padding: 2rem;
   overflow: hidden;
   max-height: 70vh;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .user-container,
@@ -334,19 +334,30 @@ th {
 }
 
 .crt-user-submit button,
-.update-user-submit button {
+.crt-user-submit a,
+.update-user-submit button,
+.update-user-submit a {
+  margin: 0.5rem 1rem;
   text-decoration: none;
   transition: all 350ms ease;
   background-color: #fff;
   border: 1px solid #999;
   border-radius: 3px;
-  padding: 0.7rem 7rem;
+  height: 3rem;
+  padding: 0.7rem 5rem;
   box-shadow: 2px 2px 5px #999;
   color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .crt-user-submit button:hover,
-.update-user-submit button:hover {
+.crt-user-submit a:hover,
+.update-user-submit button:hover,
+.update-user-submit a:hover {
   background-color: rgb(228, 228, 228);
 }
 
@@ -708,9 +719,9 @@ input[type="file"] {
   /*** Mobile M - Form Create New User ***/
   /***********************************************************/
   .container {
-      max-height: 75vh;
+    max-height: 75vh;
   }
-  
+
   .crt-user-form-container,
   .crt-user-form {
     height: 100%;
@@ -735,8 +746,10 @@ input[type="file"] {
   }
 
   .crt-user-submit button,
-  .update-user-submit button {
-    width: 100%;
+  .crt-user-submit a,
+  .update-user-submit button,
+  .update-user-submit a {
+    width: 50%;
   }
 
   .error-msg {
@@ -834,5 +847,18 @@ input[type="file"] {
   /***********************************************************/
   .crt-user-avatar {
     font-size: 6rem;
+  }
+
+  .crt-user-submit,
+  .update-user-submit {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .crt-user-submit button,
+  .crt-user-submit a,
+  .update-user-submit button,
+  .update-user-submit a {
+    width: 100%;
   }
 }
