@@ -88,12 +88,12 @@ usersBtnUpdate.forEach((btn) =>
           record.classList.add("users-record-success");
           record.addEventListener("animationend", () => {
             record.classList.remove("users-record-success");
-          });
-          response.json().then((data) => {
-            //Set updated timestamp in user record
-            updated.innerHTML = data.formattedUpdated;
-            //Reload to update mobile view
-            location.reload();
+            response.json().then((data) => {
+              //Set updated timestamp in user record
+              updated.innerHTML = data.formattedUpdated;
+              //Reload to update mobile view
+              location.reload();
+            });
           });
         }
       })
