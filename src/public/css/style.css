@@ -200,24 +200,36 @@ th {
   padding: 0rem 0.5rem;
 }
 
+.users-td-email,
+.users-td-firstname,
+.users-td-lastname {
+  cursor: pointer;
+}
+
 .users-btn-create,
 .users-btn-update,
 .users-btn-delete {
   position: relative;
   text-decoration: none;
-  color: #000;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
+  width: 100%;
+  height: 100%;
+  color: #000;
   cursor: pointer;
   transition: all 500ms ease;
   font-family: var(--fnt-fam-main) !important;
   font-size: 1rem;
 }
 
-.users-td-btn-create,
-.users-td-btn-update,
-.users-td-btn-delete {
+.tbl-user .users-td-btn-create,
+.tbl-user .users-td-btn-update,
+.tbl-user .users-td-btn-delete {
   position: relative;
+  padding: 0;
 }
 
 .users-td-btn-create::before,
@@ -228,6 +240,7 @@ th {
   top: 0;
   left: 0;
   height: 100%;
+  pointer-events: none;
   width: 0%;
   transition: width 350ms ease;
   background-color: rgb(147, 248, 147);
