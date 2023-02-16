@@ -1,4 +1,3 @@
-const usersBtnUpdate = document.querySelectorAll(".users-btn-update");
 const usersBtnDelete = document.querySelectorAll(".users-btn-delete");
 const crtUserImgUpload = document.getElementById("crt-user-img-upload");
 const crtUserImg = document.getElementById("crt-user-img");
@@ -69,56 +68,6 @@ if (crtUserLastname)
     }
     crtUserLastname.classList.remove("error-input");
   });
-
-/* Handling update user */
-usersBtnUpdate.forEach((btn) =>
-  btn.addEventListener("click", async (e) => {
-    const record = btn.parentElement.parentElement;
-    const id = record.querySelector(".users-th-id").textContent;
-    const email = record.querySelector(".users-td-email").textContent;
-    const firstname = record.querySelector(".users-td-firstname").textContent;
-    const lastname = record.querySelector(".users-td-lastname").textContent;
-    const updated = record.querySelector(".users-td-updated");
-    if (email === "" || firstname === "" || lastname === "") return;
-    if (!checkEmail(email)) return;
-    await updateUser({ id, email, firstname, lastname })
-      .then((response) => {
-        if (response.ok) {
-          //Success animation
-          record.classList.add("users-record-success");
-          record.addEventListener("animationend", () => {
-            record.classList.remove("users-record-success");
-            response.json().then((data) => {
-              //Set updated timestamp in user record
-              updated.innerHTML = data.formattedUpdated;
-              //Reload to update mobile view
-              location.reload();
-            });
-          });
-        }
-      })
-      .catch((error) => {
-        //Error animation
-        record.classList.add("users-record-error");
-        record.addEventListener("animationend", () => {
-          record.classList.remove("users-record-error");
-        });
-      });
-  })
-);
-
-async function updateUser(user) {
-  try {
-    const response = await fetch(`/users/${user.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
-    return response;
-  } catch (error) {
-    return error;
-  }
-}
 
 /* Handling delete user - Desktop View */
 usersBtnDelete.forEach((btn) =>

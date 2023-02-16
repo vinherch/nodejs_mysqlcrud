@@ -26,18 +26,13 @@
           </a>
           <% } else { %> <a href="/users/details/<%=record.id%>"><i class="fa-solid fa-user-tie avatar-list"></i> </a> <%} %>
         </td>
-        <td class="users-td-email" contenteditable="true"><%= record.email%></td>
-        <td class="users-td-firstname" contenteditable="true"><%= record.firstname%></td>
-        <td class="users-td-lastname" contenteditable="true"><%= record.lastname%></td>
+        <td class="users-td-email"><%= record.email%></td>
+        <td class="users-td-firstname"><%= record.firstname%></td>
+        <td class="users-td-lastname"><%= record.lastname%></td>
         <td class="users-td-type"><%= record.user_type%></td>
         <td class="users-td-created"><%= record.formattedCreated%></td>
         <td class="users-td-updated"><%= record.formattedUpdated%></td>
-        <td class="users-td-btn-create">
-          <a href="/users/create" class="users-btn-create">Create</a>
-        </td>
-        <td class="users-td-btn-update">
-          <button class="users-btn-update">Update</button>
-        </td>
+        <td class="users-td-btn-update"><a class="users-btn-update" href="/users/update/<%=record.id%>">Update</a></td>
         <td class="users-td-btn-delete">
           <button class="users-btn-delete">Delete</button>
         </td>

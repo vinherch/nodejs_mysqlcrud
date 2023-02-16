@@ -180,7 +180,7 @@ header {
 }
 
 .tbl-user tbody tr:hover {
-  background-color: rgba(226, 226, 226, 0.774);
+  background-color: rgba(182, 188, 195, 0.774);
 }
 
 .tbl-user thead {
@@ -198,12 +198,6 @@ th {
   text-align: center;
   height: 3rem;
   padding: 0rem 0.5rem;
-}
-
-.users-td-email,
-.users-td-firstname,
-.users-td-lastname {
-  cursor: pointer;
 }
 
 .users-btn-create,
@@ -506,16 +500,19 @@ input[type="file"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .user-details-fullname {
   display: flex;
+  max-width: 100%;
   gap: 0.3rem;
   font-size: 3rem;
   padding: 1rem 0;
   color: rgb(61, 61, 61);
   font-weight: bolder;
   justify-content: center;
+  overflow: scroll;
 }
 
 .user-details-type,
